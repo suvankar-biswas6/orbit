@@ -15,7 +15,7 @@ export const signup = async (req, res) => {
         const user = await User.findOne({ userName })
         if (user) {
             return res.status(400).json({
-                error: "Username already exists."
+                error: "userName already exists."
             })
         }
 
@@ -25,8 +25,8 @@ export const signup = async (req, res) => {
 
         //https://avatar-placeholder.iran.liara.run/
         //profile pics
-        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${userName}`
-        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${userName}`
+        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?userName=${userName}`
+        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?userName=${userName}`
 
         const newUser = new User({
             fullName,
@@ -68,7 +68,7 @@ export const login = async (req, res) => {
 		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
 		if (!user || !isPasswordCorrect) {
-			return res.status(400).json({ error: "Invalid username or password" });
+			return res.status(400).json({ error: "Invalid userName or password" });
 		}
 
 		generateTokenAndSetCookie(user._id, res);
@@ -76,7 +76,7 @@ export const login = async (req, res) => {
 		res.status(200).json({
 			_id: user._id,
 			fullName: user.fullName,
-			username: user.userName,
+			userName: user.userName,
 			profilePic: user.profilePic,
 		});
 	} catch (error) {
