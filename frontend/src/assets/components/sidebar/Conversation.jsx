@@ -18,7 +18,7 @@ const Conversation = ({ conversation, lastIdx }) => {
 					<div className='w-12 rounded-full'>
 						<img
 							src={conversation.profilePic}
-							alt='user avatar'
+							alt='user'
 						/>
 					</div>
 				</div>
